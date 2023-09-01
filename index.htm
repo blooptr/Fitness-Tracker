@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Be Fit, Be Alpha</title>
+
+<style>
+  body {
+    font-family: 'Courier New', cursive;
+    margin: 0;
+    padding: 0;
+    background-color: #fefefe;
+  }
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fefefe;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  h1, h2 {
+    text-align: center;
+    color: #333;
+  }
+  label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #555;
+  }
+  input[type="number"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  button {
+    background-color: #687597;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+   nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 1rem 0 0 0;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+        
+        nav li {
+            display: inline-block;
+            margin: 0 1rem;
+        }
+        
+        nav a {
+            color: #72828d;
+            text-decoration: none;
+            font-size: 0.8rem;
+  }
+</style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>be fit, be ALPHA</h1>
+    <nav>
+      <ul>
+        
+
+      
+      <li><a href="#recommended-water">Reccommened Water</a></li>
+      <li><a href="#progress-tracking">Progress</a></li>
+      <li><a href="#fitness-goals">Fitness goals</a></li>
+      <li><a href="#water-tracking">Track ur water comsumption</a></li>
+      <li><a href="#sleep-tracking">Track ur sleep</a></li>
+      
+      
+      </ul>
+    </nav>
+      
+    
+      
+      
+    
+    
+    <section id="fitness-goals">
+      <h2>Fitness Goals</h2>
+      <div class="form-group">
+        <label for="goal1">Goal 1:</label>
+        <input type="text" id="goal1" placeholder="Enter your fitness goal">
+      </div>
+      <div class="form-group">
+        <label for="goal2">Goal 2:</label>
+        <input type="text" id="goal2" placeholder="Enter your fitness goal">
+      </div>
+      <div class="form-group">
+        <label for="goal3">Goal 3:</label>
+        <input type="text" id="goal3" placeholder="Enter your fitness goal">
+      </div>
+      <button onclick="updateFitnessGoals()">Update Goals</button>
+      <button onclick="displayFinishedMessage()">Finished</button>
+      <div id="fitness-output"></div>
+    </section>
+    
+            <section id="progress-tracking">
+      <h2>Progress Tracking</h2>
+      <div class="form-group">
+        <label for="progress">Track Your Progress:</label>
+        <input type="text" id="progress" placeholder="Enter your progress">
+      </div>
+      <button onclick="updateProgress()">Update Progress</button>
+      <div id="progress-output"></div>
+    </section>
+    
+    <section id="recommended-water">
+      <h2>Recommended Water</h2>
+      <div class="form-group">
+        <label for="weight">Enter Your Weight (kg):</label>
+        <input type="number" id="weight" placeholder="Enter your weight in kg">
+      </div>
+      <button onclick="calculateRecommendedWater()">Calculate Recommended Water</button>
+      <div id="recommended-water-output"></div>
+    </section>
+    
+    <section id="water-tracking">
+      <h2>Water Consumption</h2>
+      <div class="form-group">
+        <label for="water">Track Water Consumed (in liters):</label>
+        <input type="number" id="water" placeholder="Enter water consumed in liters">
+      </div>
+      <button onclick="updateWater()">Update Water Consumption</button>
+      <div id="water-output"></div>
+    </section>
+    
+    <section id="sleep-tracking">
+      <h2>Sleep Tracking</h2>
+      <div class="form-group">
+        <label for="sleep">Track Sleep Duration (in hours):</label>
+        <input type="number" id="sleep" placeholder="Enter sleep duration">
+      </div>
+      <button onclick="updateSleep()">Update Sleep Duration</button>
+      <div id="sleep-output"></div>
+    </section>
+  </div>
+  
+  <script>
+function displayFinishedMessage() {
+      alert('Finished goal!');
+    }
+
+    function calculateRecommendedWater() {
+      const weightInKg = parseFloat(document.getElementById('weight').value);
+      if (!isNaN(weightInKg)) {
+        const weightInPounds = weightInKg * 2.20462;
+        const recommendedWaterInOunces = weightInPounds / 2;
+        const recommendedWaterInLiters = recommendedWaterInOunces / 33.814;
+        const recommendedWaterOutput = document.getElementById('recommended-water-output');
+        recommendedWaterOutput.innerHTML = `Recommended Water: ${recommendedWaterInLiters.toFixed(2)} liters`;
+      }
+    }
+
+    function updateProgress() {
+      const progress = document.getElementById('progress').value;
+      const progressOutput = document.getElementById('progress-output');
+      
+      if (progress) {
+        progressOutput.innerHTML = `Progress: ${progress}`;
+      } else {
+        progressOutput.innerHTML = 'Please enter progress.';
+      }
+    }
+    
+    function updateWater() {
+      const water = document.getElementById('water').value;
+      const waterOutput = document.getElementById('water-output');
+      
+      if (water) {
+        waterOutput.innerHTML = `Water Consumed: ${water} liters`;
+      } else {
+        waterOutput.innerHTML = 'Please enter water consumed.';
+      }
+    }
+    
+    function updateSleep() {
+      const sleep = document.getElementById('sleep').value;
+      const sleepOutput = document.getElementById('sleep-output');
+      
+      if (sleep < 6) {
+        sleepOutput.innerHTML = `Sleep Duration: ${sleep} hours. You need to sleep more!`;
+      } else if (sleep > 11) {
+        sleepOutput.innerHTML = `Sleep Duration: ${sleep} hours. You need to sleep less!`;
+      } else if (sleep) {
+        sleepOutput.innerHTML = `Sleep Duration: ${sleep} hours`;
+      } else {
+        sleepOutput.innerHTML = 'Please enter sleep duration.';
+      }
+    }
+
+    function updateFitnessGoals() {
+      const goals = [
+        document.getElementById('goal1').value,
+        document.getElementById('goal2').value,
+        document.getElementById('goal3').value
+      ];
+      const fitnessOutput = document.getElementById('fitness-output');
+      
+      const goalsList = goals.map((goal, index) => `<li>Goal ${index + 1}: ${goal}</li>`).join('');
+      fitnessOutput.innerHTML = `<ul>${goalsList}</ul>`;
+    }
+  </script>
+  </body>
+  </html>
